@@ -78,6 +78,6 @@ public class GameController : MonoBehaviour
     private void TimeUp()
     {
         CancelInvoke(nameof(Stopper));
-        Debug.Log("Czas up³yn¹³");
+        Debug.Log("Time's up");
     }
 }

@@ -22,6 +22,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.TryGetComponent<PickUp>( out var pickUp))
+        {
+            pickUp.Pickup();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
