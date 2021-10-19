@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         }
         characterController.Move(Vector3.down * currentSpeed);
 
-        Debug.Log((speed * currentSpeedMultiplier));
+        //Debug.Log((speed * currentSpeedMultiplier));
     }
 
     private bool GroundCheck()
