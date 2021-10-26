@@ -7,8 +7,11 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     [SerializeField] private int timeToFinish;
+
     private int timeLeft;
     private bool isPaused = false;
+    private int[] keys = new int[3];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,5 +82,23 @@ public class GameController : MonoBehaviour
     {
         CancelInvoke(nameof(Stopper));
         Debug.Log("Time's up");
+    }
+
+    public void FreezeTime(float duration)
+    {
+        CancelInvoke(nameof(Stopper));
+        Debug.Log($"Time frozen for: {duration}");
+        InvokeRepeating(nameof(Stopper), duration, 1f);
+    }
+
+    public void ModifyTimeLeft(int value)
+    {
+        timeLeft += value;
+    }
+
+    public void GetKey(KeyColor keyColor)
+    {
+        keys[(int)keyColor]++;
+        Debug.Log($"You got: {keyColor.ToString()} and you have: {keys.Length}.");
     }
 }

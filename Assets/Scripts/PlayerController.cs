@@ -22,9 +22,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-        if (hit.gameObject.TryGetComponent<PickUp>( out var pickUp))
+        if (other.gameObject.TryGetComponent<PickUp>( out var pickUp))
         {
             pickUp.Pickup();
         }

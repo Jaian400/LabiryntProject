@@ -4,26 +4,7 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    //private static List<PickUp> pickups = new List<PickUp>();
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        //pickups.Add(this);
-    }
-
-    void OnDestry()
-    {
-        //pickups.Remove(this);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Pickup()
+    public virtual void Pickup()
     {
         Debug.Log("PickedUp: " + gameObject.name);
         Destroy(gameObject);
