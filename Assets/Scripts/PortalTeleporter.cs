@@ -7,7 +7,7 @@ public class PortalTeleporter : MonoBehaviour
     private bool playerIsOverlaping = false;
 
     private Transform player;
-    [SerializeField] private Transform reciever;
+    [HideInInspector] public Transform reciever;
 
     private void Start()
     {
