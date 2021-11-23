@@ -9,13 +9,10 @@ public class PortalCamera : MonoBehaviour
 
     [HideInInspector] public Transform otherRenderPlane;
     private Transform playerCamera;
-
-    public float MyAngle { get; set; }
-
-    // Start is called before the first frame update
     void Start()
     {
         playerCamera = Camera.main.transform;
+        GetComponent<Camera>().fieldOfView = Camera.main.fieldOfView;
     }
 
     // Update is called once per frame
@@ -26,15 +23,26 @@ public class PortalCamera : MonoBehaviour
 
     void AdjustCameraPosition()
     {
-        Vector3 playerOffsetPortal = playerCamera.position - otherRenderPlane.position;
-        transform.position = renderPlane.position + playerOffsetPortal;
+        Vector3 playerOffsetPortal = otherRenderPlane.InverseTransformPoint(playerCamera.position);
+        playerOffsetPortal = renderPlane.TransformPoint(playerOffsetPortal);
 
-        float angularDiff = Quaternion.Angle(renderPlane.rotation, otherRenderPlane.rotation);
+        transform.position = RotatePointAroundPivot(playerOffsetPortal, renderPlane.position, new Vector3(0f, 180f, 0f));
 
-        Quaternion portalRotationDifference = Quaternion.AngleAxis(angularDiff, Vector3.up);
-        Vector3 newCameraDirection = portalRotationDifference * playerCamera.forward;
+        Vector3 playerOffsetDirection = otherRenderPlane.InverseTransformDirection(playerCamera.forward);
+        playerOffsetDirection = renderPlane.TransformDirection(playerOffsetDirection);
 
-        transform.rotation = Quaternion.LookRotation(newCameraDirection, Vector3.up);
+        transform.rotation = Quaternion.LookRotation(playerOffsetDirection);
+        transform.Rotate(new Vector3(0f, 180f, 0f), Space.World);
+    }
+
+    public Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)
+    {
+        return RotatePointAroundPivot(point, pivot, Quaternion.Euler(angles));
+    }
+
+    public Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion quaternion)
+    {
+        return quaternion * (point - pivot) + pivot;
     }
 
     public void SetTexture(RenderTexture texture)

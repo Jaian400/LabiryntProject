@@ -6,13 +6,19 @@ public class Clock : PickUp
 {
     [SerializeField] private int value;
 
-    [SerializeField] private Renderer renderer;
-    [SerializeField] private Material red;
-    [SerializeField] private Material green;
+    [SerializeField] private Renderer plusRenderer;
+    [SerializeField] private Renderer minusRenderer;
 
     private void Start()
     {
-        renderer.material = value < 0 ? red : green;
+        if(value < 0)
+        {
+            plusRenderer.enabled = false;
+        }
+        else
+        {
+            minusRenderer.enabled = false;
+        }
     }
 
     public override void Pickup()
