@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 908176265525192922}
   - component: {fileID: 4119236573642311054}
+  - component: {fileID: 8212463005822908184}
   m_Layer: 0
   m_Name: Diamond
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8541777140975462633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4708814426623654378}
@@ -44,6 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b52fb9d48d94b2418adc143e0443d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 90
+  points: 0
+--- !u!65 &8212463005822908184
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8541777140975462633}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7146523, y: 1.719632, z: 1.5935204}
+  m_Center: {x: -0.004334837, y: 0.96179134, z: 0.10283983}
 --- !u!1001 &5103608313965075969
 PrefabInstance:
   m_ObjectHideFlags: 0

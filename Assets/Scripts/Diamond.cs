@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Diamond : PickUp 
 {
-    [SerializeField] private int points;
+    [SerializeField] public int points;
 
     public override void Pickup()
     {

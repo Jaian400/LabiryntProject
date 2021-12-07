@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     private bool isPaused = false;
     private int[] keys = new int[3];
 
+    private int diamondsCollected;
+    public int points;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,5 +103,21 @@ public class GameController : MonoBehaviour
     {
         keys[(int)keyColor]++;
         Debug.Log($"You got: {keyColor.ToString()} and you have: {keys.Length}.");
+    }
+
+    public void AddDiamond(int points)
+    {
+        diamondsCollected++;
+        this.points += points;
+    }
+
+    public bool HasKey(KeyColor keyColor)
+    {
+        return keys[(int)keyColor] > 0;
+    }
+
+    public void RemoveKey(KeyColor keyColor)
+    {
+        keys[(int)keyColor]--;
     }
 }

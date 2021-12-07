@@ -12,12 +12,15 @@ public class Portal : MonoBehaviour
     [SerializeField] private Renderer renderPlane;
     [SerializeField] private Material portalMaterial;
 
+    [SerializeField] private KeyHole keyHole;
+
     private RenderTexture renderTexture;
 
     private void Awake()
     {
         target.portalTeleporter.reciever = portalTeleporter.transform;
         target.portalCamera.otherRenderPlane = portalCamera.RenderPlane;
+        target.keyHole.otherKeyHole = keyHole;
 
         renderTexture = new RenderTexture(Screen.width, Screen.height, 24);
         renderPlane.material = Instantiate(portalMaterial);
