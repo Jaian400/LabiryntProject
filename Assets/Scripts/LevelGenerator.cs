@@ -12,38 +12,52 @@ public class LevelGenerator : MonoBehaviour
         public GameObject Prefab;
     }
 
+    [Serializable]
+    public class mapLayer
+    {
+        [SerializeField] private string name;
+        [SerializeField] public Texture2D map;
+        [SerializeField] public List<ColorToPrefab> colorToPrefabs;
+    }
+
+    [SerializeField] private List<mapLayer> mapLayers;
     [SerializeField] private float cellSize;
-    [SerializeField] private Texture2D map;
-
-    [SerializeField] private List<ColorToPrefab> colorToPrefabs;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void GenerateLevel()
     {
         Debug.Log("Generating level");
 
-        for(int x = 0; x < map.width; x++)
+        for(int c = transform.childCount - 1; c>=0; c--)
         {
-            for(int y = 0; y < map.height; y++)
+            DestroyImmediate(transform.GetChild(c).gameObject);
+        }
+
+        foreach(var mapLayer in mapLayers)
+        {
+            var map = mapLayer.map;
+            for(int x = 0; x < map.width; x++)
             {
-                SpawnPrefab(x, y);
+                for(int y = 0; y < map.height; y++)
+                {
+                    SpawnPrefab(x, y, map, mapLayer.colorToPrefabs);
+                }
             }
         }
     }
 
-    private void SpawnPrefab(int x, int y)
+    private void SpawnPrefab(int x, int y, Texture2D map, List<ColorToPrefab>colorToPrefabs)
     {
-        map.GetPixel(x, y);
+        var colorToPrefab = colorToPrefabs.Find((colorToPrefab) => colorToPrefab.color == map.GetPixel(x, y));
+
+        if (colorToPrefab == null)
+        {
+            Debug.LogError("No such prefab for given color");
+        }
+        else 
+        {
+            var go = Instantiate(colorToPrefab.Prefab);
+            go.transform.SetParent(transform);
+            go.transform.localPosition = new Vector3(x * cellSize, 0f, y * cellSize);
+        }
     }
 }

@@ -20,12 +20,30 @@ public class KeyHole : MonoBehaviour
     private Collider keyHoleController;
     private Animator keyHoleAnimator;
 
+    [SerializeField] private Renderer renderer;
+    [SerializeField] private Material red;
+    [SerializeField] private Material green;
+    [SerializeField] private Material blue;
+
     // Start is called before the first frame update
     void Start()
     {
         keyHoleController = GetComponent<Collider>();
         keyHoleAnimator = GetComponent<Animator>();
         closedPosition = door.localPosition;
+
+        switch(keyColor)
+        {
+            case KeyColor.Blue:
+                renderer.material = blue;
+                break;
+            case KeyColor.Red:
+                renderer.material = red;
+                break;
+            case KeyColor.Green:
+                renderer.material = green;
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

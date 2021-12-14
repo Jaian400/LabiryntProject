@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8827302748958650009}
   - component: {fileID: 9040391989606760715}
   m_Layer: 0
-  m_Name: Clock
+  m_Name: ClockMinus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 90
-  value: 0
+  value: -10
   plusRenderer: {fileID: 2197366297420023878}
   minusRenderer: {fileID: 8730813866228606308}
 --- !u!65 &9040391989606760715

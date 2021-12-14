@@ -215,6 +215,10 @@ MonoBehaviour:
   otherKeyHole: {fileID: 1508576096613241100}
   animateDoors: 0
   opened: 0
+  renderer: {fileID: 6837659397973675439}
+  red: {fileID: 2100000, guid: edbc15c69f84da440807946b35676a9a, type: 2}
+  green: {fileID: 2100000, guid: 49297c487634a8749b776135a2c8c7f1, type: 2}
+  blue: {fileID: 2100000, guid: b760c0084ba54af4abf066816c62d475, type: 2}
 --- !u!95 &8006809253499884398
 Animator:
   serializedVersion: 3
@@ -925,6 +929,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f5640cd863d374543a2232f94ba2e9a2, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f5640cd863d374543a2232f94ba2e9a2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: edbc15c69f84da440807946b35676a9a, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f5640cd863d374543a2232f94ba2e9a2, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b760c0084ba54af4abf066816c62d475, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f5640cd863d374543a2232f94ba2e9a2, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 49297c487634a8749b776135a2c8c7f1, type: 2}
     - target: {fileID: 919132149155446097, guid: f5640cd863d374543a2232f94ba2e9a2, type: 3}
       propertyPath: m_Name
       value: Key 1
@@ -938,5 +958,10 @@ PrefabInstance:
 --- !u!4 &5669770393578829504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5640cd863d374543a2232f94ba2e9a2, type: 3}
+  m_PrefabInstance: {fileID: 5270807365127999787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6837659397973675439 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f5640cd863d374543a2232f94ba2e9a2, type: 3}
   m_PrefabInstance: {fileID: 5270807365127999787}
   m_PrefabAsset: {fileID: 0}
