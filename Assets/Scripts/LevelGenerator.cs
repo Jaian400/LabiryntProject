@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class LevelGenerator : MonoBehaviour
         }
         else 
         {
-            var go = Instantiate(colorToPrefab.Prefab);
+            var go = PrefabUtility.InstantiatePrefab(colorToPrefab.Prefab) as GameObject;
             go.transform.SetParent(transform);
             go.transform.localPosition = new Vector3(x * cellSize, 0f, y * cellSize);
         }

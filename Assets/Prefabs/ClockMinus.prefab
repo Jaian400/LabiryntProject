@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22627aa9190e6114b8c63df5439b24d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundClip: {fileID: 8300000, guid: f9790a97a6bc0fa4a82273d43095f372, type: 3}
   rotationSpeed: 90
   value: -10
   plusRenderer: {fileID: 2197366297420023878}
