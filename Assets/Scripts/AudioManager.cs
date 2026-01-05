@@ -8,6 +8,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] musicClips;
     [SerializeField] private AudioClip heartBeat;
 
+    [SerializeField, Range(0f, 1f)] private float musicVolume;
+    [SerializeField, Range(0f, 1f)] private float heartBeatVolume;
+
     private AudioSource musicSource;
     private AudioSource heartBeatSource;
     private int currentTrack = 0;
@@ -20,6 +23,7 @@ public class AudioManager : MonoBehaviour
 
         heartBeatSource = gameObject.AddComponent<AudioSource>();
         heartBeatSource.playOnAwake = false;
+        heartBeatSource.loop = true;
         heartBeatSource.clip = heartBeat;
 
         if(random)
@@ -34,16 +38,14 @@ public class AudioManager : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        foreach(var source in GetComponents<AudioSource>())
-        {
-            source.volume = volume;
-        }
+        heartBeatSource.volume = volume * heartBeatVolume;
+        musicSource.volume = volume * musicVolume;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(musicSource.isPlaying)
+        if(musicSource.isPlaying && !GameController.Instance.IsPaused)
         {
             PlayNext();
         }
@@ -65,17 +67,37 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    private float currentTime;
-
     public void Pause()
     {
-        currentTime = musicSource.time;
-        musicSource.Stop();
-        heartBeatSource.Stop();
+        musicSource.Pause();
+        heartBeatSource.Pause();
     }
 
-    public void Play(float time = 0)
+    public void UnPause()
     {
+        musicSource.Play();
 
+        if(GameController.Instance.IsLowTime)
+        {
+            heartBeatSource.Play();
+        }
     }
+
+    public void heartBeatPitch(float pitch)
+    {
+        heartBeatSource.pitch = pitch;
+    }
+
+    public void startHeartBeat()
+    {
+        if(!heartBeatSource.isPlaying)
+        {
+            heartBeatSource.Play();
+        }
+    }
+
+    public void stopHeartBeat()
+    {
+        heartBeatSource.Stop();
+    }    
 }

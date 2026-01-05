@@ -7,9 +7,22 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     [SerializeField] private int timeToFinish;
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private float lowTime = 0.1f;
 
     private int timeLeft;
     private bool isPaused = false;
+    public bool IsPaused => isPaused;
+
+    public bool IsLowTime
+    {
+        get
+        {
+            var pitchPoint = timeToFinish * lowTime;
+            return timeLeft < pitchPoint;
+        }
+    }
+
     private int[] keys = new int[3];
 
     private int diamondsCollected;
@@ -30,7 +43,7 @@ public class GameController : MonoBehaviour
 
         timeLeft = timeToFinish;
 
-        isPaused = true;
+        //isPaused = true;
 
         InvokeRepeating(nameof(Stopper), 1, 1);
     }
@@ -39,6 +52,20 @@ public class GameController : MonoBehaviour
     {
         timeLeft--;
         Debug.Log($"Time left: {timeLeft} s");
+
+        var pitchPoint = timeToFinish * lowTime;
+
+        if (timeLeft < pitchPoint)
+        {
+            var newPitch = Mathf.Lerp(0.8f, 1.5f, 1 - (timeLeft/pitchPoint));
+
+            audioManager.heartBeatPitch(newPitch);
+            audioManager.startHeartBeat();
+        }
+        else
+        {
+            audioManager.stopHeartBeat();
+        }
 
         if(timeLeft<=0)
         {
@@ -70,6 +97,7 @@ public class GameController : MonoBehaviour
     private void UnPause()
     {
         isPaused = false ;
+        audioManager.UnPause();
         Time.timeScale = 1;
         Debug.Log("Game resumed");
     }
@@ -77,6 +105,7 @@ public class GameController : MonoBehaviour
     private void Pause()
     {
         isPaused = true;
+        audioManager.Pause();
         Time.timeScale = 0;
         Debug.Log("Game paused");
     }
@@ -119,5 +148,10 @@ public class GameController : MonoBehaviour
     public void RemoveKey(KeyColor keyColor)
     {
         keys[(int)keyColor]--;
+    }
+
+    public void Win()
+    {
+        Debug.Log("Player won");
     }
 }
